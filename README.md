@@ -39,6 +39,38 @@ use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
 ],
 ```
 
+### CORS & Cookies
+In addition, you should enable the withCredentials option on your global axios instance. Typically, this should be performed in your resources/js/bootstrap.js file:
+```bash
+axios.defaults.withCredentials = true;
+```
+
+### Authenticating
+
+To authenticate your SPA, your SPA's login page should first make a request to the /sanctum/csrf-cookie route to initialize CSRF protection for the application:  
+
+Once CSRF protection has been initialized, you should make a POST request to the typical Laravel /login route. This /login route may be provided by the laravel/ui authentication scaffolding package.
+
+### Laravel/UI
+
+Laravel's laravel/ui package provides a quick way to scaffold all of the routes and views you need for authentication using a few simple commands:
+
+```bash
+composer require laravel/ui
+
+```
+
+ 
+
+### Protecting Routes
+
+```bash
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
+```
+
+
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
