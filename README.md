@@ -70,6 +70,57 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 ```
 
+### Create a controller
+
+It's necessary for use a route and make login
+```bash
+php artisan make:controller UserController
+```
+
+### Create a route for controller
+
+this route is make in file routes/api.php
+```bash
+Route::post('/login', 'UserController@login');
+```
+
+now is necessary your create a user for testing the route
+
+we go use the [seeder](https://laravel.com/docs/7.x/seeding#writing-seeders) for it
+
+```bash
+php artisan make:seeder UserSeeder
+```
+
+edit the file in path **database/seeds/UserSeeder.php**
+```bash
+<?php
+
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+
+class DatabaseSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        DB::table('users')->insert([
+           'name' => 'admin',
+           'email' => 'admin@gmail.com',
+           'password' => Hash::make('password'),
+       ]);
+    }
+}
+```
+
+
+
 
 ## License
 
