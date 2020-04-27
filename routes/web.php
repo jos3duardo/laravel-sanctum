@@ -14,7 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return response()->json([
+        'message' => 'Welcome Laravel Sanctum',
+        'author' => 'jos3daurdo',
+        'email' => 'jos3duardolopes@gmail.com',
+        'git' => 'https://github.com/jos3duardo'
+    ],200);
 });
 
 Auth::routes();
