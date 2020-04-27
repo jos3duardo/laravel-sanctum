@@ -59,9 +59,6 @@ Laravel's laravel/ui package provides a quick way to scaffold all of the routes 
 composer require laravel/ui
 
 ```
-
- 
-
 ### Protecting Routes
 
 ```bash
@@ -133,7 +130,7 @@ use the db:seed Artisan command to seed you database.
 php artisan db:seed
 ```
 
-in UserController implements the code below, i need necessary all file because is more easy <kbd>Crtl</kbd>+<kbd>C</kbd> and <kbd>Crtl</kbd>+<kbd>V</kbd>
+in UserController implements the code below
 
 ```bash
 <?php
@@ -146,7 +143,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
-
 {
     public function login(Request $request)
     {
