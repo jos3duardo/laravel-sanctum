@@ -24,6 +24,12 @@ class UserController extends Controller
             ]);
         }
 
-        return $user->createToken($request->device_name)->plainTextToken;
+        $token =  $user->createToken($user->id)->plainTextToken;
+
+        return response()->json([
+            'user' => $user->name,
+            'email' => $user->email,
+            'token' => $token
+        ],200);
     }
 }
