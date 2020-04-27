@@ -133,7 +133,7 @@ use the db:seed Artisan command to seed you database.
 php artisan db:seed
 ```
 
-in UserController implements the code below, i need necessary all file because is more easy <kbd>Crtl</kbd>
+in UserController implements the code below, i need necessary all file because is more easy <kbd>Crtl</kbd>+<kbd>C</kbd> and <kbd>Crtl</kbd>+<kbd>V</kbd>
 
 ```bash
 <?php
