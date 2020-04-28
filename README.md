@@ -39,12 +39,6 @@ use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
 ],
 ```
 
-### CORS & Cookies
-In addition, you should enable the withCredentials option on your global axios instance. Typically, this should be performed in your resources/js/bootstrap.js file:
-```bash
-axios.defaults.withCredentials = true;
-```
-
 ### Authenticating
 
 To authenticate your SPA, your SPA's login page should first make a request to the /sanctum/csrf-cookie route to initialize CSRF protection for the application:  
