@@ -28,15 +28,20 @@ Finally, you should run your database migrations. Sanctum will create one databa
 ```bash
 php artisan migrate
 ```
-Next, if you plan to utilize Sanctum to authenticate an SPA, you should add Sanctum's middleware to your api middleware group within your app/Http/Kernel.php file:
+### Middleware
+Next, if you plan to utilize Sanctum to authenticate an SPA, you should add Sanctum's middleware to your api middleware group within your **app/Http/Kernel.php** file:
 ```bash
 use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
+
+...
 
 'api' => [
     EnsureFrontendRequestsAreStateful::class,
     'throttle:60,1',
     \Illuminate\Routing\Middleware\SubstituteBindings::class,
 ],
+
+...
 ```
 
 ### Authenticating
@@ -53,13 +58,6 @@ Laravel's laravel/ui package provides a quick way to scaffold all of the routes 
 composer require laravel/ui
 
 ```
-### Protecting Routes
-
-```bash
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-```
 
 ### Create a controller
 
@@ -68,11 +66,21 @@ It's necessary for use a route and make login
 php artisan make:controller UserController
 ```
 
-### Create a route for controller
+### Create a route for Controller
 
 this route is make in file routes/api.php
 ```bash
 Route::post('/login', 'UserController@login');
+```
+
+### Protecting Routes
+
+this route has protected for middleware sanctum
+
+```bash
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
 ```
 
 now is necessary your create a user for testing the route
@@ -83,45 +91,10 @@ we go use the [seeder](https://laravel.com/docs/7.x/seeding#writing-seeders) for
 php artisan make:seeder UserSeeder
 ```
 
-edit the file in path **database/seeds/UserSeeder.php**
+
+Now you may use the *db:seed* Artisan command to seed your database. By default, the *db:seed* command runs the DatabaseSeeder class, which may be used to call other seed classes. However, you may use the **--class** option to specify a specific seeder class to run individually:
 ```bash
-<?php
-
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
-
-class DatabaseSeeder extends Seeder
-{
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
-    {
-        DB::table('users')->insert([
-           'name' => 'admin',
-           'email' => 'admin@gmail.com',
-           'password' => Hash::make('password'),
-       ]);
-    }
-}
-```
-
-uncomment code in path **database/seeds/DatabaseSeeder.php**
-
-```bash
- public function run()
-    {
-         $this->call(UserSeeder::class);
-    }
-```
-
-use the db:seed Artisan command to seed you database.
-```bash
-php artisan db:seed
+php artisan db:seed --class=UserSeeder
 ```
 
 in UserController implements the code below
@@ -162,8 +135,14 @@ class UserController extends Controller
         ],200);
     }
 }
-
 ```
+image preview for request login
+
+![login](public/img/login.png)
+
+image preview for request return
+
+![login](public/img/users.png)
 
 ## License
 
